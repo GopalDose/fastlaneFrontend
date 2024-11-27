@@ -1,0 +1,41 @@
+.AddressInput{
+    padding: 20px;
+    border: 2px solid var(--secondary);
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.addressType{
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 600;
+}
+
+.address-display p{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.address-display p {
+    margin-bottom: 10px;
+}
+
+.address-display span {
+    font-weight: bold;
+    color: white;
+}
+
+.address-display p:last-child{
+    margin-bottom: 30px;
+}
+
+
+.addrspan{
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: green;
+    margin-bottom: 30px;
+}
