@@ -101,7 +101,6 @@ const ShippingCost = () => {
     const payload = {
       sender,
       receiver,
-      packageType,
       access_token: localStorage.getItem('access_token'),
     };
 
