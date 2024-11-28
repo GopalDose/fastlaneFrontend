@@ -55,7 +55,7 @@ const ShippingCost = () => {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/get_shipping/', {
+      const response = await fetch('http://13.60.90.90:8000/api/get_shipping/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ const ShippingCost = () => {
     formData.append('access_token', localStorage.getItem('access_token'));
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/bulk_calculate/', {
+      const response = await fetch('http://13.60.90.90:8000/api/bulk_calculate/', {
         method: 'POST',
         body: formData,
       });
