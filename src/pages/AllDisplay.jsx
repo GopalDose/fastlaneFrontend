@@ -130,7 +130,7 @@ const AllDisplay = () => {
                 <td>{item.usps_days}</td>
                 <td>
                   <a
-                    href={`http://127.0.0.1:8000/${item.label_url}`}
+                    href={`http://13.60.90.90:8000/${item.label_url}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
