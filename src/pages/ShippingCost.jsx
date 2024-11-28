@@ -240,5 +240,3 @@ const ShippingCost = () => {
 
 export default ShippingCost;
 
-
-when I select package ask dimensions
