@@ -23,49 +23,6 @@ const ShippingCost = () => {
 
   const [csvFile, setCsvFile] = useState(null);
   const [packageType, setPackageType] = useState('');
-  const [dimensions, setDimensions] = useState({ length: '', width: '', height: '' });
-  const [serviceType, setServiceType] = useState('11');
-  const handleServiceTypeChange = (e) => {
-    setServiceType(e.target.value);
-  };
-  const handlePackageTypeChange = (e) => {
-    const selectedType = e.target.value;
-    setPackageType(selectedType);
-
-    if (selectedType === 'Package') {
-      Swal.fire({
-        title: 'Enter Package Dimensions',
-        html: `
-          <input id="length" class="swal2-input" placeholder="Length (in cm)" type="number" min="0" step="0.1">
-          <input id="width" class="swal2-input" placeholder="Width (in cm)" type="number" min="0" step="0.1">
-          <input id="height" class="swal2-input" placeholder="Height (in cm)" type="number" min="0" step="0.1">
-        `,
-        showCancelButton: true,
-        confirmButtonText: 'Submit',
-        preConfirm: () => {
-          const length = document.getElementById('length').value;
-          const width = document.getElementById('width').value;
-          const height = document.getElementById('height').value;
-
-          if (!length || !width || !height) {
-            Swal.showValidationMessage('All dimensions are required');
-          }
-
-          return { length, width, height };
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          setDimensions(result.value);
-          Swal.fire('Dimensions Set!', `Length: ${result.value.length}, Width: ${result.value.width}, Height: ${result.value.height}`, 'success');
-        } else {
-          setPackageType('');
-        }
-      });
-    } else {
-      setDimensions({ length: '', width: '', height: '' });
-    }
-  };
-
 
   const handleCheckShipper = async () => {
     const allFieldsFilled =
@@ -89,23 +46,16 @@ const ShippingCost = () => {
       });
       return;
     }
-    if (packageType === 'Package' && (!dimensions.length || !dimensions.width || !dimensions.height)) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Dimensions Missing',
-        text: 'Please provide dimensions for the package.',
-      });
-      return;
-    }
 
     const payload = {
       sender,
       receiver,
+      packageType,
       access_token: localStorage.getItem('access_token'),
     };
 
     try {
-      const response = await fetch('http://13.60.90.90:8000/api/get_shipping/', {
+      const response = await fetch('http://127.0.0.1:8000/api/get_shipping/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -203,7 +153,7 @@ const ShippingCost = () => {
     formData.append('access_token', localStorage.getItem('access_token'));
 
     try {
-      const response = await fetch('http://13.60.90.90:8000/api/bulk_calculate/', {
+      const response = await fetch('http://127.0.0.1:8000/api/bulk_calculate/', {
         method: 'POST',
         body: formData,
       });
@@ -264,8 +214,8 @@ const ShippingCost = () => {
         <AddressInput addrType="Sender" data={sender} setData={setSender} />
         <AddressInput addrType="Receiver" data={receiver} setData={setReceiver} />
       </div>
-      <div className="package-select">
-        <select value={packageType} onChange={handlePackageTypeChange}>
+      <div className='package-select'>
+        <select value={packageType} onChange={(e) => setPackageType(e.target.value)}>
           <option value="">Select Type</option>
           <option value="Package">Package</option>
           <option value="UPS Letter">UPS Letter</option>
@@ -273,19 +223,6 @@ const ShippingCost = () => {
           <option value="UPS Express Box">UPS Express Box</option>
         </select>
       </div>
-      <div className="package-select">
-          <label htmlFor="serviceType">Select UPS Service Type:</label>
-          <select id="serviceType" value={serviceType} onChange={handleServiceTypeChange}>
-            <option value="11">Standard</option>
-            <option value="01">Next Day Air</option>
-            <option value="02">2nd Day Air</option>
-            <option value="03">Ground</option>
-            <option value="07">Express</option>
-            <option value="08">Expedited</option>
-            <option value="12">3 Day Select</option>
-            <option value="13">Next Day Air Saver</option>
-          </select>
-        </div>
       <div className="btndiv">
         <button className='check-shipper' onClick={handleCheckShipper}>Check Shipper</button>
       </div>
@@ -302,3 +239,6 @@ const ShippingCost = () => {
 };
 
 export default ShippingCost;
+
+
+when I select package ask dimensions
