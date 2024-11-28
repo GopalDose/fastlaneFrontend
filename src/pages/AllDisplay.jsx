@@ -48,7 +48,7 @@ const AllDisplay = () => {
         `${item.receiver.addr}, ${item.receiver.city}, ${item.receiver.state}, ${item.receiver.zip}`,
         item.ups_cost,
         item.usps_cost,
-        `http://127.0.0.1:8000/${item.label_url}`,
+        `http://13.60.90.90:8000/${item.label_url}`,
         optimal
       ];
     });
